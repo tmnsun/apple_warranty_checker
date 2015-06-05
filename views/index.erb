@@ -1,0 +1,32 @@
+<h1>Warranty checker</h1>
+
+<form method="get" action="/">
+<p>Enter your IMEI
+  <input type="text" name="imei"/> or use this examples:
+  <a href='/?imei=013977000323877'>013977000323877</a>,
+  <a href='/?imei=DQTJRT2YF193'>DQTJRT2YF193</a>.
+</p>
+</form>
+
+<% if @imei %>
+  <h1>
+    IMEI: <%= @imei %>
+  </h1>
+  <% if @errors %>
+    <h2>Errors:</h2>
+    <ul>
+      <% @errors.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <% if @is_expired %>
+      <p>Warranty expired</p>
+    <% else %>
+      <p>Warrany active</p>
+    <% end %>
+    <% if @expired_at %>
+      <p>Expiration date: <%= @expired_at %></p>
+    <% end %>
+  <% end %>
+<% end %>
