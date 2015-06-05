@@ -6,6 +6,12 @@ class App < Sinatra::Application
 
   protected
 
+  helpers do
+    def h(text)
+      Rack::Utils.escape_html(text)
+    end
+  end
+
   def fetch_imei_info(imei)
     @imei = imei
     scraper = AppleWarranty::Scraper.new
